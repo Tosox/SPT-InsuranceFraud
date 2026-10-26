@@ -34,8 +34,8 @@ jobs:
 
     - name: Create Release Zip
       run: |
-        mkdir -p release/SPT/user/mods/${{ env.PLUGIN_NAME }}
-        cp -a artifact/*.dll release/SPT/user/mods/${{ env.PLUGIN_NAME }}/
+        mkdir -p release/SPT_Runtime/user/mods/${{ env.PLUGIN_NAME }}
+        cp -a artifact/*.dll release/SPT_Runtime/user/mods/${{ env.PLUGIN_NAME }}/
         cd release
         zip -r ../${{ env.PLUGIN_NAME }}-${{ github.event.inputs.build-ver }}.zip .
         cd ..
