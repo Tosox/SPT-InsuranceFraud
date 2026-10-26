@@ -1,0 +1,51 @@
+name: Create Release
+
+on:
+  workflow_dispatch:
+    inputs:
+      build-ver:
+        description: Release version
+        required: true
+        default: v1.0.0
+        
+env:
+  PLUGIN_NAME: Tosox.InsuranceFraud
+
+jobs:
+  build:
+    uses: ./.github/workflows/build.yml
+
+  release:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    needs:
+      - build
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v6
+
+    - name: Download Build Artifacts
+      uses: actions/download-artifact@v4
+      with:
+        name: SPT-InsuranceFraud
+        path: artifact
+
+    - name: Create Release Zip
+      run: |
+        mkdir -p release/SPT/user/mods/${{ env.PLUGIN_NAME }}
+        cp -a artifact/*.dll release/SPT/user/mods/${{ env.PLUGIN_NAME }}/
+        cd release
+        zip -r ../${{ env.PLUGIN_NAME }}-${{ github.event.inputs.build-ver }}.zip .
+        cd ..
+
+    - name: Create GitHub Release
+      uses: softprops/action-gh-release@v2
+      with:
+        tag_name: ${{ github.event.inputs.build-ver }}
+        name: ${{ github.event.inputs.build-ver }}
+        files: |
+          ${{ env.PLUGIN_NAME }}-${{ github.event.inputs.build-ver }}.zip
+        fail_on_unmatched_files: true
+        make_latest: true

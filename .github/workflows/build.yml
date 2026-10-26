@@ -1,0 +1,39 @@
+name: Build
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+  workflow_call:
+
+env:
+  BUILD_CONFIGURATION: Release
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v6
+      
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v5
+      with:
+        dotnet-version: 9.0
+        
+    - name: Restore NuGet packages
+      run: dotnet restore
+
+    - name: Build Solution
+      run: dotnet build --configuration ${{ env.BUILD_CONFIGURATION }} --no-restore
+
+    - name: Archive Build Artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: SPT-InsuranceFraud
+        path: bin/${{ env.BUILD_CONFIGURATION }}/*
+        retention-days: 1
