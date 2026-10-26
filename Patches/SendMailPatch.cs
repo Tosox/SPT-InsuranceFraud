@@ -1,4 +1,5 @@
 using HarmonyLib;
+using SPTarkov.DI.Annotations;
 using SPTarkov.Reflection.Patching;
 using SPTarkov.Server.Core.Controllers;
 using SPTarkov.Server.Core.Models.Eft.Profile;
@@ -7,6 +8,7 @@ using Tosox.InsuranceFraud.Helpers;
 
 namespace Tosox.InsuranceFraud.Patches
 {
+    [Injectable]
     public class SendMailPatch : AbstractPatch
     {
         protected override MethodBase GetTargetMethod()

@@ -12,7 +12,7 @@ Insured gear that is still on your body when you die is handled by the regular i
 ## 📁 Installation
 
 * Download the latest release
-* Copy the `SPT` folder into your SPT installation
+* Copy the `SPT_Runtime` folder into your SPT installation
 * Start the game
 
 ## 📝 Changelog

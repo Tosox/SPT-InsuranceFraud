@@ -1,13 +1,15 @@
 using HarmonyLib;
+using SPTarkov.DI.Annotations;
 using SPTarkov.Reflection.Patching;
 using SPTarkov.Server.Core.Extensions;
 using SPTarkov.Server.Core.Models.Eft.Match;
-using SPTarkov.Server.Core.Services;
+using SPTarkov.Server.Core.Services.InRaid;
 using System.Reflection;
 using Tosox.InsuranceFraud.Helpers;
 
 namespace Tosox.InsuranceFraud.Patches
 {
+    [Injectable]
     public class LocationLifecycleServicePatch : AbstractPatch
     {
         protected override MethodBase GetTargetMethod()
