@@ -19,6 +19,10 @@ Insured gear that is still on your body when you die is handled by the regular i
 
 You can check out the latest changes in [`CHANGELOG.md`](CHANGELOG.md).
 
+## 📷 Preview
+
+<img src="readme-res/preview.gif" alt="preview" width="500"/>
+
 ## 🙏 Credits
 
 * [PenguinGreenTea](https://github.com/ibxccc123/SPT-InsuranceFraud) for providing the original mod for SPT 3.9
